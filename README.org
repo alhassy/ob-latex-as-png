@@ -67,6 +67,7 @@ Note: The [[https://www.tug.org/FontCatalogue/goudyinitialen/][Goudy Initalen]] 
   :PROPERTIES:
   :CUSTOM_ID: Screenshot-2-Bubble-Diagrams
   :END:
+
   #+html: <div align="center">
 [[file:./bubble_diagram.png]]
 #+html: </div>
@@ -76,6 +77,41 @@ Note: The [[https://www.tug.org/FontCatalogue/goudyinitialen/][Goudy Initalen]] 
 #+PROPERTY: header-args:latex-as-png :results raw value replace
 #+begin_src latex-as-png :file example.pdf :resolution 120
    \smartdiagram[bubble diagram]{Emacs,Org-mode, \LaTeX, Pretty Images, HTML}
+,#+end_src
+#+end_src
+#+html: </details>
+
+
+Note: The extension given to =:file= does not matter, only the base name is used
+and a =.png= is produced.
+* Screenshot 3: Fine-grained Size Control
+  :PROPERTIES:
+  :CUSTOM_ID: Screenshot-3-Fine-grained-Size-Control
+  :END:
+
+You can get fine grained control of the size of the resulting PNG by using
+LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.overleaf.com/learn/latex/picture_environment][environment]].
+
+#+html: <div align="center">
+[[file:./using-picture-enviornment_with_source.png]]
+#+html: </div>
+
+#+html: <details> <summary>🌱 Click to see Source! 🗝 </summary>
+#+begin_src org
+#+begin_src latex-as-png :file using-picture-environment
+\input GoudyIn.fd \input Acorn.fd
+\def\light#1{\huge \usefont{U}{Acorn}{xl}{n} #1}
+\def\thick#1{\fontsize{50}{60}\selectfont \usefont{U}{GoudyIn}{xl}{n} #1}
+% \fontsize{X}{Y} ⇒ Write with point size X, using Y point size between lines
+
+\pagecolor{brown}
+
+\begin{picture}(124,60)
+\put(0,0){\thick{ORG}}
+\put(18,42){\light{EMACS}}
+\put(0,55){\rotatebox{-45}{\scriptsize \LaTeX}}
+\put(109,43){\rotatebox{45}{\scriptsize \texttt{HTML}}}
+\end{picture}
 ,#+end_src
 #+end_src
 #+html: </details>
@@ -111,6 +147,7 @@ Place the following incantation in your init (•̀ᴗ•́)و)
 \input GoudyIn.fd
 \def\fncy#1{\fontsize{50}{60}\selectfont{\usefont{U}{GoudyIn}{xl}{n} #1}}
 
+\pagecolor{pink}
 \hspace{0.15\textwidth}\fncy{EMACS}
 \newline
 \fncy{ORG}\raisebox{0.5em}{$\sim$}\fncy{MODE}
@@ -120,12 +157,37 @@ Place the following incantation in your init (•̀ᴗ•́)و)
 [[file:ob-latex-as-png.png]]
 
 #+PROPERTY: header-args:latex-as-png :results raw value replace
-#+begin_src latex-as-png :file example.pdf :resolution 120
-   \smartdiagram[bubble diagram]{Emacs,Org-mode, \LaTeX, Pretty Images, HTML}
+#+begin_src latex-as-png :file example :resolution 120
+\pagecolor{yellow}
+\smartdiagram[bubble diagram]{Emacs,Org-mode, \LaTeX, Pretty Images, HTML}
 #+end_src
 
 #+RESULTS:
 [[file:example.png]]
+
+You can get fine grained control of the size of the resulting PNG by using
+LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.overleaf.com/learn/latex/picture_environment][environment]].
+
+#+begin_src latex-as-png :file using-picture-environment
+\input GoudyIn.fd \input Acorn.fd
+\def\light#1{\huge \usefont{U}{Acorn}{xl}{n} #1}
+\def\thick#1{\fontsize{50}{60}\selectfont \usefont{U}{GoudyIn}{xl}{n} #1}
+% \fontsize{X}{Y} ⇒ Write with point size X, using Y point size between lines
+
+\pagecolor{brown}
+
+\begin{picture}(124,60)
+\put(0,0){\thick{ORG}}
+\put(18,42){\light{EMACS}}
+\put(0,55){\rotatebox{-45}{\scriptsize \LaTeX}}
+\put(109,43){\rotatebox{45}{\scriptsize \texttt{HTML}}}
+\end{picture}
+#+end_src
+
+#+RESULTS:
+                 [[file:using-picture-environment.png]]
+
+Neato!
 
 * COMMENT Testing :Incomplete:
   :PROPERTIES:

@@ -21,8 +21,9 @@
 
 1.  [Screenshot 1: Fancy Writing](#Screenshot-1-Fancy-Writing)
 2.  [Screenshot 2: Bubble Diagrams](#Screenshot-2-Bubble-Diagrams)
-3.  [Hint: Always redisplay images after `C-c C-c`](#Hint-Always-redisplay-images-after-C-c-C-c)
-4.  [Enjoy!](#Enjoy)
+3.  [Screenshot 3: Fine-grained Size Control](#Screenshot-3-Fine-grained-Size-Control)
+4.  [Hint: Always redisplay images after `C-c C-c`](#Hint-Always-redisplay-images-after-C-c-C-c)
+5.  [Enjoy!](#Enjoy)
 
 
 # Screenshot 1: Fancy Writing
@@ -63,6 +64,41 @@ Note: The [Goudy Initalen](https://www.tug.org/FontCatalogue/goudyinitialen/) fo
     #+PROPERTY: header-args:latex-as-png :results raw value replace
     #+begin_src latex-as-png :file example.pdf :resolution 120
        \smartdiagram[bubble diagram]{Emacs,Org-mode, \LaTeX, Pretty Images, HTML}
+    #+end_src
+
+</details>
+
+Note: The extension given to `:file` does not matter, only the base name is used
+and a `.png` is produced.
+
+
+# Screenshot 3: Fine-grained Size Control
+
+You can get fine grained control of the size of the resulting PNG by using
+LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](https://www.overleaf.com/learn/latex/picture_environment).
+
+<div align="center">
+
+![img](./using-picture-enviornment_with_source.png)
+
+</div>
+
+<details> <summary>🌱 Click to see Source! 🗝 </summary>
+
+    #+begin_src latex-as-png :file using-picture-environment
+    \input GoudyIn.fd \input Acorn.fd
+    \def\light#1{\huge \usefont{U}{Acorn}{xl}{n} #1}
+    \def\thick#1{\fontsize{50}{60}\selectfont \usefont{U}{GoudyIn}{xl}{n} #1}
+    % \fontsize{X}{Y} ⇒ Write with point size X, using Y point size between lines
+
+    \pagecolor{brown}
+
+    \begin{picture}(124,60)
+    \put(0,0){\thick{ORG}}
+    \put(18,42){\light{EMACS}}
+    \put(0,55){\rotatebox{-45}{\scriptsize \LaTeX}}
+    \put(109,43){\rotatebox{45}{\scriptsize \texttt{HTML}}}
+    \end{picture}
     #+end_src
 
 </details>
