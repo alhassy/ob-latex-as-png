@@ -93,23 +93,27 @@ Argument BODY is the source text of the block."
 
          ;; The target file
          (file.ext (or (cdr (assoc :file processed-params)) "ob-latex-as-png.pdf"))
-         (file (first (split-string file.ext "\\.")))
+         (file (car (split-string file.ext "\\.")))
          (pdflatex (format "pdflatex -shell-escape -jobname=%s " file)))
 
     ;; ⟨0⟩ Generate the PDF
     (org-babel-eval pdflatex full-body)
 
-    ;; ⟨1⟩ Transform it to a PNG
-    (shell-command (format "pdftoppm %s.pdf -png %s -r %s" file file resolution))
+    (dolist (cmd (list
+                 ;; ⟨1⟩ Transform it to a PNG
+                  (format "pdftoppm %s.pdf -png %s -r %s" file file resolution)
+                 ;; ⟨2⟩ for some reason pdftoppm produces “OUTPUTNAME-1.png”
+                 ;; so I rename away the extra “-1”.
+                 (format "mv %s-1.png %s.png" file file)
+                 ;; ⟨3⟩ Remove the new PDF
+                 (format "rm %s.pdf" file)))
+      ;; ⟨4⟩ Handle filenames with spaces or other characters that the shell
+      ;; might get caught on; then actually send everything to the shell
+      ;; (shell-command  (shell-quote-argument cmd))
+      ;; No! This breaks the call to pdftoppm, not sure why.
+      (shell-command cmd))
 
-    ;; ⟨2⟩ for some reason pdftoppm produces “OUTPUTNAME-1.png”
-    ;; so I rename away the extra “-1”.
-    (shell-command (format "mv %s-1.png %s.png" file file))
-
-    ;; ⟨3⟩ Remove the new PDF
-    (shell-command (format "rv %s.pdf" file))
-
-    ;; ⟨4⟩ Return the a raw link to the PNG
+    ;; ⟨5⟩ Return the a raw link to the PNG
     (format "[[file:%s.png]]" file)))
 
 (provide 'ob-latex-as-png)
