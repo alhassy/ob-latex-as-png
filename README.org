@@ -1,0 +1,324 @@
+#+title: ob-latex-as-png
+#+author: Musa Al-hassy
+#+options: d:nil toc:nil
+#+macro: blurb An Org-babel “language” whose execution produces PNGs from LaTeX snippets; useful for shipping *arbitrary* LaTeX results in HTML
+
+# TODO: Mention how to add latex headers
+
+* top matter                                                         :ignore:
+  :PROPERTIES:
+  :CUSTOM_ID: top-matter
+  :END:
+
+#+begin_quote
+An Org-babel “language” whose execution produces PNGs from LaTeX snippets;
+useful for shipping *arbitrary* LaTeX results in HTML or to *inline* such snippets
+in Emacs! (•̀ᴗ•́)و
+#+end_quote
+
+#+html: <div align="center">
+
+badge:Emacs|23/26/28|green|https://www.gnu.org/software/emacs|gnu-emacs
+badge:Org|9.3.6|blue|https://orgmode.org|gnu
+
+# +html: <span>
+# [[badge:org-special-block-extras|1.2|informational|https://github.com/alhassy/org-special-block-extras|Gnu-Emacs][org-special-block-extras badge]]
+# +html: <a href="https://melpa.org/#/org-special-block-extras"><img alt="MELPA" src="https://melpa.org/packages/org-special-block-extras-badge.svg"/></a>
+# +html: </span>
+
+[[badge:license|GNU_3|informational|https://www.gnu.org/licenses/gpl-3.0.en.html|read-the-docs][gnu 3 license badge]]
+tweet:https://github.com/alhassy/ob-latex-as-png
+badge:contributions|welcome|green|https://github.com/alhassy/ob-latex-as-png/issues
+# [[badge:docs|literate|success|https://github.com/alhassy/emacs.d#what-does-literate-programming-look-like|read-the-docs][read-the-docs badge]]
+
+badge:author|musa_al-hassy|purple|https://alhassy.github.io/|nintendo-3ds
+badge:|buy_me_a coffee|gray|https://www.buymeacoffee.com/alhassy|buy-me-a-coffee
+
+#+html: </div>
+
+#+TOC: headlines 2
+
+* Screenshot 1: Fancy Writing
+  :PROPERTIES:
+  :CUSTOM_ID: Screenshot-1-Fancy-Writing
+  :END:
+
+#+html: <div align="center">
+[[file:./Emacs_Org-mode.png]]
+#+html: </div>
+
+#+html: <details> <summary>:rose: Click to see Source!</summary>
+#+begin_src org
+#+PROPERTY: header-args:latex-as-png :results raw value replace
+#+begin_src latex-as-png
+\input GoudyIn.fd
+\def\fncy#1{\fontsize{50}{60}\selectfont{\usefont{U}{GoudyIn}{xl}{n} #1}}
+
+\hspace{0.15\textwidth}\fncy{EMACS}
+\newline
+\fncy{ORG}\raisebox{0.5em}{$\sim$}\fncy{MODE}
+,#+end_src
+#+end_src
+#+html: </details>
+
+Note: The [[https://www.tug.org/FontCatalogue/goudyinitialen/][Goudy Initalen]] font exists in uppercase only.
+
+* Screenshot 2: Bubble Diagrams
+  :PROPERTIES:
+  :CUSTOM_ID: Screenshot-2-Bubble-Diagrams
+  :END:
+  #+html: <div align="center">
+[[file:./bubble_diagram.png]]
+#+html: </div>
+
+#+html: <details> <summary>:rocket: Click to see Source!</summary>
+#+begin_src org
+#+PROPERTY: header-args:latex-as-png :results raw value replace
+#+begin_src latex-as-png :file example.pdf :resolution 120
+   \smartdiagram[bubble diagram]{Emacs,Org-mode, \LaTeX, Pretty Images, HTML}
+,#+end_src
+#+end_src
+#+html: </details>
+
+* Hint: Always redisplay images after =C-c C-c=
+  :PROPERTIES:
+  :CUSTOM_ID: Hint-Always-redisplay-images-after-C-c-C-c
+  :END:
+
+Place the following incantation in your init (•̀ᴗ•́)و)
+#+begin_src emacs-lisp
+;; Always redisplay images after C-c C-c (org-ctrl-c-ctrl-c)
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+#+end_src
+
+* Enjoy!
+  :PROPERTIES:
+  :CUSTOM_ID: Enjoy
+  :END:
+
+#+html: <div align="center">
+  # Gif of bird with heart
+#+html: ![Thank you](https://camo.githubusercontent.com/4fd95715cff5db944532897c286e526780e90660/68747470733a2f2f6d65646961332e67697068792e636f6d2f6d656469612f53396f4e4743314534325654324a527973762f67697068792e676966)
+#+html: </div>
+
+* COMMENT Examples :Source:
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Examples
+  :END:
+
+#+PROPERTY: header-args:latex-as-png :results raw value replace
+#+begin_src latex-as-png
+\input GoudyIn.fd
+\def\fncy#1{\fontsize{50}{60}\selectfont{\usefont{U}{GoudyIn}{xl}{n} #1}}
+
+\hspace{0.15\textwidth}\fncy{EMACS}
+\newline
+\fncy{ORG}\raisebox{0.5em}{$\sim$}\fncy{MODE}
+#+end_src
+
+#+RESULTS:
+[[file:ob-latex-as-png.png]]
+
+#+PROPERTY: header-args:latex-as-png :results raw value replace
+#+begin_src latex-as-png :file example.pdf :resolution 120
+   \smartdiagram[bubble diagram]{Emacs,Org-mode, \LaTeX, Pretty Images, HTML}
+#+end_src
+
+#+RESULTS:
+[[file:example.png]]
+
+* COMMENT Testing :Incomplete:
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Testing
+  :END:
+
+(org-babel-execute:latex-as-png
+ "\\smartdiagram[bubble diagram]{Emacs,Org-mode, \\LaTeX, Pretty Images, HTML 12}"
+ nil)
+
+* COMMENT MELPA Checks
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-MELPA-Checks
+  :END:
+https://github.com/riscy/melpazoid
+
+C-c C-c this block first!
+#+begin_src emacs-lisp
+(setq proj '~/ob-latex-as-png)
+(setq file (second (s-split "/" (symbol-name proj))))
+(setq proj.el (format "~/%s/%s.el" file file))
+#+end_src
+
+#+RESULTS:
+: ~/ob-latex-as-png/ob-latex-as-png.el
+
+1. [X] In Github repo: Create new file ⇒ License.txt ⇒ Select template ⇒ GNU 3
+2. [X] Ensure first line ends with: -*- lexical-binding: t; -*-
+3. [X] Include appropriate standard keywords;
+   #+begin_src emacs-lisp
+(pp finder-known-keywords)
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+   ((abbrev . "abbreviation handling, typing shortcuts, and macros")
+    (bib . "bibliography processors")
+    (c . "C and related programming languages")
+    (calendar . "calendar and time management tools")
+    (comm . "communications, networking, and remote file access")
+    (convenience . "convenience features for faster editing")
+    (data . "editing data (non-text) files")
+    (docs . "Emacs documentation facilities")
+    (emulations . "emulations of other editors")
+    (extensions . "Emacs Lisp language extensions")
+    (faces . "fonts and colors for text")
+    (files . "file editing and manipulation")
+    (frames . "Emacs frames and window systems")
+    (games . "games, jokes and amusements")
+    (hardware . "interfacing with system hardware")
+    (help . "Emacs help systems")
+    (hypermedia . "links between text or other media types")
+    (i18n . "internationalization and character-set support")
+    (internal . "code for Emacs internals, build process, defaults")
+    (languages . "specialized modes for editing programming languages")
+    (lisp . "Lisp support, including Emacs Lisp")
+    (local . "code local to your site")
+    (maint . "Emacs development tools and aids")
+    (mail . "email reading and posting")
+    (matching . "searching, matching, and sorting")
+    (mouse . "mouse support")
+    (multimedia . "images and sound")
+    (news . "USENET news reading and posting")
+    (outlines . "hierarchical outlining and note taking")
+    (processes . "processes, subshells, and compilation")
+    (terminals . "text terminals (ttys)")
+    (tex . "the TeX document formatter")
+    (tools . "programming tools")
+    (unix . "UNIX feature interfaces and emulators")
+    (vc . "version control")
+    (wp . "word processing"))
+   #+end_example
+4. [ ] Use #' instead of ' for function symbols
+5. [X] Use ‘-’ as a separator, not ‘/’.
+6. [ ] Consider reading:
+   https://github.com/bbatsov/emacs-lisp-style-guide#the-emacs-lisp-style-guide
+7. [ ] Use cl-loop, cl-first, cl-second, cl-third instead of loop, first, second,
+   third; ie just C-c C-c the following.
+
+   #+begin_src emacs-lisp
+(defun my/re-replace-all-occurances-in-current-buffer (old new)
+"Replace regular expression OLD with NEW, which may contain
+  \\& in NEWTEXT means substitute original matched text.
+  \\N means substitute what matched the Nth \(...\).
+       If Nth parens didn't match, substitute nothing.
+       Indexing begins at 1!
+  \\\\ means insert one backslash.
+"
+  (save-excursion
+    (goto-char 0)
+    (while (ignore-errors (re-search-forward old))
+      (replace-match new))))
+
+   (-let [cl-words '(loop first second third)]
+     (find-file proj.el)
+     (loop for oops in (mapcar #'symbol-name cl-words)
+           do (my/re-replace-all-occurances-in-current-buffer
+               (format "(\\(%s\\) " (regexp-quote oops))
+               "(cl-\\1 ")))
+   #+end_src
+
+   #+RESULTS:
+8. [ ] byte-compile and address any concerns
+   #+begin_src emacs-lisp
+(byte-compile-file proj.el)
+(switch-to-buffer "*Compile-Log*")
+   #+end_src
+
+9. [ ] =M-x checkdoc= on the lisp file to ensure it passes expected style issues.
+   - Symbols =nil, t= should not appear in single quotes.
+
+     C-c C-c; if there is an error, you'll be redirected to it.
+      #+begin_src emacs-lisp
+   (find-file proj.el)
+   (checkdoc)
+   #+end_src
+
+10. [ ] Ensure that package-linter raises no issues; i.e., the following has no result.
+     #+BEGIN_SRC emacs-lisp
+ (use-package package-lint)
+  (find-file-other-window proj.el)
+  (package-lint-buffer (car (last (s-split "/" proj.el))))
+ #+END_SRC
+
+ #+RESULTS:
+
+11. [X] Create a recipe file by invoking: M-x package-build-create-recipe
+    - Place it in: melpa/recipes/
+    - The name of the file should be the name of the package, no extension.
+
+       #+BEGIN_SRC emacs-lisp :tangle ~/melpa/recipes/org-special-block-extras
+    (ob-latex-as-png :fetcher github :repo "alhassy/ob-latex-as-png")
+    #+END_SRC
+12. [ ] Commit and push everything in your project's repo!
+13. [ ] Ensure the recipe builds successfully:
+    #+BEGIN_SRC emacs-lisp
+    (shell-command-to-string (format "cd ~/melpa; rm ~/melpa/packages/%s-*; make recipes/%s" file file))
+    #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+     • Building package ob-latex-as-png ...
+    Package: ob-latex-as-png
+    Fetcher: github
+    Source:  https://github.com/alhassy/ob-latex-as-png.git
+
+    Updating /Users/musa/melpa/working/ob-latex-as-png/
+    Built ob-latex-as-png in 0.978s, finished at Mon Jun 15 10:30:25 2020
+     ✓ Success:
+    16 -rw-r--r--  1 musa  staff   4.8K 15 Jun 10:30 packages/ob-latex-as-png-20200615.1427.el
+     8 -rw-r--r--  1 musa  staff   418B 15 Jun 10:30 packages/ob-latex-as-png-20200615.1427.entry
+     8 -rw-r--r--  1 musa  staff   1.0K 15 Jun 10:30 packages/ob-latex-as-png-badge.svg
+     8 -rw-r--r--  1 musa  staff   786B 15 Jun 10:30 packages/ob-latex-as-png-readme.txt
+
+    #+end_example
+
+14. [ ] Ensure the package installs properly from within Emacs:
+
+      #+BEGIN_SRC emacs-lisp
+(thread-last (f-files "~/melpa/packages/")
+  (--filter (s-contains? file it))
+  (--filter (s-contains? ".el" it))
+  car
+  package-install-file)
+#+END_SRC
+     #+RESULTS:
+     : #s(package-desc ob-latex-as-png (20200615 1427) "Org-babel functions for latex-as-png evaluation" ((emacs (26 1)) (org (9 1))) single nil nil ((:authors ("Musa Al-hassy" . "alhassy@gmail.com")) (:maintainer "Musa Al-hassy" . "alhassy@gmail.com") (:keywords "literate programming" "reproducible research" "org" "convenience") (:url . "https://github.com/alhassy/ob-latex-as-png")) nil)
+
+15. [X] Produce a dedicated pull request branch
+
+    #+begin_src emacs-lisp
+    (magit-status "~/melpa")
+    #+end_src
+
+    + Now =b c= to checkout a new branch.
+    + Push this branch on your melpa fork.
+    + Go to the https://github.com/melpa/ repo and
+      there'll be a big green PR button ^_^
+* COMMENT Making ~README.org~
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Making-README-org
+  :END:
+
+  Evaluate the following source block with ~C-c C-c~ to produce a ~README~ file.
+
+#+NAME: make-readme
+#+BEGIN_SRC emacs-lisp
+(org-md-export-to-markdown)
+; (async-shell-command "grip")
+; Running on http://localhost:6419/
+#+END_SRC
+
+#+RESULTS: make-readme
+: README.md
+
+*Then* use =grip= to see that this looks reasonable.

@@ -79,7 +79,7 @@ Argument BODY is the source text of the block."
   (let* ((processed-params (org-babel-process-params params))
 
          ;; Augment usepackage declarations and front-matter for LaTeX
-         (full-body (concat "\n\\documentclass[crop]{standalone}\n"
+         (full-body (concat "\n\\documentclass[varwidth,crop]{standalone}\n"
                             (mapconcat (apply-partially #'format
                                                         "\\usepackage{%s}")
                                        ob-latex-as-png-packages
