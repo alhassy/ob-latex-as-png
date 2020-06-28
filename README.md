@@ -22,15 +22,16 @@
 1.  [Screenshot 1: Fancy Writing](#Screenshot-1-Fancy-Writing)
 2.  [Screenshot 2: Bubble Diagrams](#Screenshot-2-Bubble-Diagrams)
 3.  [Screenshot 3: Fine-grained Size Control](#Screenshot-3-Fine-grained-Size-Control)
-4.  [Hint: Always redisplay images after `C-c C-c`](#Hint-Always-redisplay-images-after-C-c-C-c)
-5.  [Enjoy!](#Enjoy)
+4.  [Screenshot 4: *Local* LaTeX Header Matter](#Screenshot-4-Local-LaTeX-Header-Matter)
+5.  [Hint: Always redisplay images after `C-c C-c`](#Hint-Always-redisplay-images-after-C-c-C-c)
+6.  [Enjoy!](#Enjoy)
 
 
 # Screenshot 1: Fancy Writing
 
 <div align="center">
 
-![img](./Emacs_Org-mode.png)
+![img](Emacs_Org-mode.png)
 
 </div>
 
@@ -55,7 +56,7 @@ Note: The [Goudy Initalen](https://www.tug.org/FontCatalogue/goudyinitialen/) fo
 
 <div align="center">
 
-![img](./bubble_diagram.png)
+![img](bubble_diagram.png)
 
 </div>
 
@@ -79,7 +80,7 @@ LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](htt
 
 <div align="center">
 
-![img](./using-picture-enviornment_with_source.png)
+![img](using-picture-enviornment_with_source.png)
 
 </div>
 
@@ -102,6 +103,68 @@ LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](htt
     #+end_src
 
 </details>
+
+
+# Screenshot 4: *Local* LaTeX Header Matter
+
+You can get fine grained control of the size of the resulting PNG by using
+LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](https://www.overleaf.com/learn/latex/picture_environment).
+
+You can add arbitrary LaTeX header matter &#x2014;i.e., the stuff before LaTeX's
+`\begin{document}`&#x2014; by using having a line with just “ `% in` ” to separate the
+header from the main PNG body.
+
+<details> <summary>🐺 Customisation and Global Headers 🗝 </summary>
+
+    (defvar ob-latex-as-png-header '("\\usepackage{smartdiagram}")
+      "The LaTeX preamble used for executing latex-as-png source blocks.
+
+    This is generally any LaTeX matter that may appear before \\begin{document}.")
+
+
+    (defvar ob-latex-as-png-header-separator "% in"
+      "A literal expression that separates local LaTeX header matter from the body.
+
+    Everything before the separator is matter that is necessary
+    to produce a PNG from the primary LaTeX.")
+
+</details>
+
+<div align="center">
+
+![img](neural-networks_with_source.png)
+
+</div>
+
+<details> <summary>🌱 Click to see Source! 🗝 </summary>
+
+    #+begin_src latex-as-png :results replace :file neural-networks
+    \usepackage{neuralnetwork}
+    % in
+    \begin{neuralnetwork}[height=4]
+      \newcommand{\x}[2]{$x_#2$}
+      \newcommand{\y}[2]{$y_#2$}
+      \newcommand{\hfirst}[2]{\small $h^{(1)}_#2$}
+      \newcommand{\hsecond}[2]{\small $h^{(2)}_#2$}
+      \newcommand{\mylinktext}[4] {
+        % from layer=#1, from node=#2
+        % to layer=#3, to node=#4
+      \ifnum1=#1\relax
+         \ifnum3=#4\relax $w^{#1}_{#4,#2}$ \fi
+      \else \fi
+      }
+      % Then assign it:
+      \setdefaultlinklabel{\mylinktext}
+      \inputlayer[count=3, bias=false, title=Input\\layer, text=\x]
+      \hiddenlayer[count=4, bias=false, title=Hidden\\layer 1, text=\hfirst] \linklayers
+      \hiddenlayer[count=3, bias=false, title=Hidden\\layer 2, text=\hsecond] \linklayers
+      \outputlayer[count=2, title=Output\\layer, text=\y] \linklayers
+    \end{neuralnetwork}
+    #+end_src
+
+</details>
+
+( Learn more about the neural networks LaTeX library [here](https://github.com/battlesnake/neural). )
 
 
 # Hint: Always redisplay images after `C-c C-c`

@@ -5,6 +5,8 @@
 
 # TODO: Mention how to add latex headers
 
+# Link: [[https://tex.stackexchange.com/questions/11866/compile-a-latex-document-into-a-png-image-thats-as-short-as-possible][Compile a LaTeX document into a PNG image that's as short as possible]]
+
 * top matter                                                         :ignore:
   :PROPERTIES:
   :CUSTOM_ID: top-matter
@@ -44,7 +46,7 @@ badge:|buy_me_a coffee|gray|https://www.buymeacoffee.com/alhassy|buy-me-a-coffe
   :END:
 
 #+html: <div align="center">
-[[file:./Emacs_Org-mode.png]]
+[[file:Emacs_Org-mode.png]]
 #+html: </div>
 
 #+html: <details> <summary>:rose: Click to see Source!</summary>
@@ -69,7 +71,7 @@ Note: The [[https://www.tug.org/FontCatalogue/goudyinitialen/][Goudy Initalen]] 
   :END:
 
   #+html: <div align="center">
-[[file:./bubble_diagram.png]]
+[[file:bubble_diagram.png]]
 #+html: </div>
 
 #+html: <details> <summary>:rocket: Click to see Source!</summary>
@@ -93,7 +95,7 @@ You can get fine grained control of the size of the resulting PNG by using
 LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.overleaf.com/learn/latex/picture_environment][environment]].
 
 #+html: <div align="center">
-[[file:./using-picture-enviornment_with_source.png]]
+[[file:using-picture-enviornment_with_source.png]]
 #+html: </div>
 
 #+html: <details> <summary>🌱 Click to see Source! 🗝 </summary>
@@ -115,6 +117,68 @@ LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.o
 ,#+end_src
 #+end_src
 #+html: </details>
+
+* Screenshot 4: /Local/ LaTeX Header Matter
+  :PROPERTIES:
+  :CUSTOM_ID: Screenshot-4-Local-LaTeX-Header-Matter
+  :END:
+
+You can get fine grained control of the size of the resulting PNG by using
+LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.overleaf.com/learn/latex/picture_environment][environment]].
+
+You can add arbitrary LaTeX header matter ---i.e., the stuff before LaTeX's
+=\begin{document}=--- by using having a line with just “ =% in= ” to separate the
+header from the main PNG body.
+
+#+html: <details> <summary>🐺 Customisation and Global Headers 🗝 </summary>
+#+begin_src emacs-lisp
+(defvar ob-latex-as-png-header '("\\usepackage{smartdiagram}")
+  "The LaTeX preamble used for executing latex-as-png source blocks.
+
+This is generally any LaTeX matter that may appear before \\begin{document}.")
+
+
+(defvar ob-latex-as-png-header-separator "% in"
+  "A literal expression that separates local LaTeX header matter from the body.
+
+Everything before the separator is matter that is necessary
+to produce a PNG from the primary LaTeX.")
+#+end_src
+#+html: </details>
+
+#+html: <div align="center">
+[[file:neural-networks_with_source.png]]
+#+html: </div>
+
+#+html: <details> <summary>🌱 Click to see Source! 🗝 </summary>
+#+begin_src org
+#+begin_src latex-as-png :results replace :file neural-networks
+\usepackage{neuralnetwork}
+% in
+\begin{neuralnetwork}[height=4]
+  \newcommand{\x}[2]{$x_#2$}
+  \newcommand{\y}[2]{$y_#2$}
+  \newcommand{\hfirst}[2]{\small $h^{(1)}_#2$}
+  \newcommand{\hsecond}[2]{\small $h^{(2)}_#2$}
+  \newcommand{\mylinktext}[4] {
+    % from layer=#1, from node=#2
+    % to layer=#3, to node=#4
+  \ifnum1=#1\relax
+     \ifnum3=#4\relax $w^{#1}_{#4,#2}$ \fi
+  \else \fi
+  }
+  % Then assign it:
+  \setdefaultlinklabel{\mylinktext}
+  \inputlayer[count=3, bias=false, title=Input\\layer, text=\x]
+  \hiddenlayer[count=4, bias=false, title=Hidden\\layer 1, text=\hfirst] \linklayers
+  \hiddenlayer[count=3, bias=false, title=Hidden\\layer 2, text=\hsecond] \linklayers
+  \outputlayer[count=2, title=Output\\layer, text=\y] \linklayers
+\end{neuralnetwork}
+,#+end_src
+#+end_src
+#+html: </details>
+
+( Learn more about the neural networks LaTeX library [[https://github.com/battlesnake/neural][here]]. )
 
 * Hint: Always redisplay images after =C-c C-c=
   :PROPERTIES:
@@ -174,6 +238,7 @@ LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.o
 \def\thick#1{\fontsize{50}{60}\selectfont \usefont{U}{GoudyIn}{xl}{n} #1}
 % \fontsize{X}{Y} ⇒ Write with point size X, using Y point size between lines
 
+% pagecolor{pink}
 \pagecolor{brown}
 
 \begin{picture}(124,60)
@@ -185,9 +250,69 @@ LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.o
 #+end_src
 
 #+RESULTS:
+[[file:using-picture-environment.png]]
+
+# +RESULTS:
                  [[file:using-picture-environment.png]]
 
 Neato!
+
+#+begin_src latex-as-png :results replace :file neural-networks
+\usepackage{neuralnetwork}
+% in
+\begin{neuralnetwork}[height=4]
+  \newcommand{\x}[2]{$x_#2$}
+  \newcommand{\y}[2]{$y_#2$}
+  \newcommand{\hfirst}[2]{\small $h^{(1)}_#2$}
+  \newcommand{\hsecond}[2]{\small $h^{(2)}_#2$}
+  \newcommand{\mylinktext}[4] {
+    % from layer=#1, from node=#2
+    % to layer=#3, to node=#4
+  \ifnum1=#1\relax
+     \ifnum3=#4\relax $w^{#1}_{#4,#2}$ \fi
+  \else \fi
+  }
+  % Then assign it:
+  \setdefaultlinklabel{\mylinktext}
+  \inputlayer[count=3, bias=false, title=Input\\layer, text=\x]
+  \hiddenlayer[count=4, bias=false, title=Hidden\\layer 1, text=\hfirst] \linklayers
+  \hiddenlayer[count=3, bias=false, title=Hidden\\layer 2, text=\hsecond] \linklayers
+  \outputlayer[count=2, title=Output\\layer, text=\y] \linklayers
+\end{neuralnetwork}
+#+end_src
+
+#+RESULTS:
+[[file:neural-networks.png]]
+
+     #
+
+* COMMENT Screenshot: Using /Global/ LaTeX Headers
+  :PROPERTIES:
+  :CUSTOM_ID: COMMENT-Screenshot-Using-Global-LaTeX-Headers
+  :END:
+
+#+begin_src emacs-lisp
+(push 'bclogo ob-latex-as-png-packages)
+#+end_src
+
+#+begin_src latex-as-png :file using-picture-environment-ptII
+\input GoudyIn.fd \input Acorn.fd
+\def\light#1{\huge \usefont{U}{Acorn}{xl}{n} #1}
+\def\thick#1{\huge \usefont{U}{GoudyIn}{xl}{n} #1}
+% \fontsize{X}{Y} ⇒ Write with point size X, using Y point size between lines
+
+\pagecolor{pink}
+
+\begin{picture}(140,125)
+\put(15,50){\rotatebox{45}{\light{EMACS}}}
+\put(80,102){\rotatebox{-45}{\large\sc \thick{ORG}}}
+\put(65,1){\rotatebox{45}{\light{LATEX}}}
+\put(3,50){\rotatebox{-45}{\thick{HTML}}}
+\put(55,62){\tiny Hey, there!}
+\put(60,43){\tiny \bcsmbh}
+\put(55,38){\tiny Welcome!}
+\end{picture}
+#+end_src
 
 * COMMENT Testing :Incomplete:
   :PROPERTIES:
@@ -281,7 +406,7 @@ C-c C-c this block first!
     (while (ignore-errors (re-search-forward old))
       (replace-match new))))
 
-   (-let [cl-words '(loop first second third)]
+(-let [cl-words '(loop first second third)]
      (find-file proj.el)
      (loop for oops in (mapcar #'symbol-name cl-words)
            do (my/re-replace-all-occurances-in-current-buffer
@@ -290,11 +415,6 @@ C-c C-c this block first!
    #+end_src
 
    #+RESULTS:
-8. [ ] byte-compile and address any concerns
-   #+begin_src emacs-lisp
-(byte-compile-file proj.el)
-(switch-to-buffer "*Compile-Log*")
-   #+end_src
 
 9. [ ] =M-x checkdoc= on the lisp file to ensure it passes expected style issues.
    - Symbols =nil, t= should not appear in single quotes.
@@ -304,6 +424,9 @@ C-c C-c this block first!
    (find-file proj.el)
    (checkdoc)
    #+end_src
+
+   #+RESULTS:
+   : t
 
 10. [ ] Ensure that package-linter raises no issues; i.e., the following has no result.
      #+BEGIN_SRC emacs-lisp
