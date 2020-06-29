@@ -53,6 +53,7 @@
 (require 'ob-ref)
 (require 'ob-comint)
 (require 'ob-eval)
+(require 'ox-latex)
 
 ;; Treat (colour) this “language” as LaTeX
 (add-to-list 'org-src-lang-modes '("latex-as-png" . latex))
@@ -129,7 +130,7 @@ Argument CONTENTS is the source text of the block."
     (unless (ignore-errors (org-latex-compile (format "%s.tex" file)))
             (message "ob-latex-as-png: There seems to be a LaTeX error!")
             (switch-to-buffer "*Org PDF LaTeX Output*")
-            (end-of-buffer))
+            (goto-char (point-max)))
 
     ;; Now to get the PNG and cleanup.
     (dolist (cmd (list
