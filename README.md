@@ -7,6 +7,8 @@
 [![badge:Emacs](https://img.shields.io/badge/Emacs-23%2F26%2F28-green?logo=gnu-emacs)](https://www.gnu.org/software/emacs)
 [![badge:Org](https://img.shields.io/badge/Org-9.3.6-blue?logo=gnu)](https://orgmode.org)
 
+<a href="https://melpa.org/#/ob-latex-as-png"><img alt="MELPA" src="https://melpa.org/packages/ob-latex-as-png-badge.svg"/></a>
+
 [![badge:license](https://img.shields.io/badge/license-GNU_3-informational?logo=read-the-docs)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![badge:https://github.com/alhassy/ob-latex-as-png](https://img.shields.io/twitter/url?url=https://github.com/alhassy/ob-latex-as-png)](https://twitter.com/intent/tweet?text=This%20looks%20super%20neat%20%28%E2%80%A2%CC%80%E1%B4%97%E2%80%A2%CC%81%29%D9%88%3A:&url=https://github.com/alhassy/ob-latex-as-png)
 [![badge:contributions](https://img.shields.io/badge/contributions-welcome-green)](https://github.com/alhassy/ob-latex-as-png/issues)
@@ -15,6 +17,10 @@
 [![badge:](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/alhassy)
 
 </div>
+
+    ;; Installation
+    (use-package ob-latex-as-png
+      :ensure t)
 
 
 # Table of Contents

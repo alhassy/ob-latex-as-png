@@ -3,8 +3,6 @@
 #+options: d:nil toc:nil
 #+macro: blurb An Org-babel “language” whose execution produces PNGs from LaTeX snippets; useful for shipping *arbitrary* LaTeX results in HTML
 
-# TODO: Mention how to add latex headers
-
 # Link: [[https://tex.stackexchange.com/questions/11866/compile-a-latex-document-into-a-png-image-thats-as-short-as-possible][Compile a LaTeX document into a PNG image that's as short as possible]]
 
 * top matter                                                         :ignore:
@@ -23,6 +21,8 @@ in Emacs! (•̀ᴗ•́)و
 badge:Emacs|23/26/28|green|https://www.gnu.org/software/emacs|gnu-emacs
 badge:Org|9.3.6|blue|https://orgmode.org|gnu
 
+#+html: <a href="https://melpa.org/#/ob-latex-as-png"><img alt="MELPA" src="https://melpa.org/packages/ob-latex-as-png-badge.svg"/></a>
+
 # +html: <span>
 # [[badge:org-special-block-extras|1.2|informational|https://github.com/alhassy/org-special-block-extras|Gnu-Emacs][org-special-block-extras badge]]
 # +html: <a href="https://melpa.org/#/org-special-block-extras"><img alt="MELPA" src="https://melpa.org/packages/org-special-block-extras-badge.svg"/></a>
@@ -37,6 +37,12 @@ badge:author|musa_al-hassy|purple|https://alhassy.github.io/|nintendo-3ds
 badge:|buy_me_a coffee|gray|https://www.buymeacoffee.com/alhassy|buy-me-a-coffee
 
 #+html: </div>
+
+#+begin_src emacs-lisp
+;; Installation
+(use-package ob-latex-as-png
+  :ensure t)
+#+end_src
 
 #+TOC: headlines 2
 
@@ -447,7 +453,7 @@ C-c C-c this block first!
 12. [ ] Commit and push everything in your project's repo!
 13. [ ] Ensure the recipe builds successfully:
     #+BEGIN_SRC emacs-lisp
-    (shell-command-to-string (format "cd ~/melpa; rm ~/melpa/packages/%s-*; make recipes/%s" file file))
+(shell-command-to-string (format "cd ~/melpa; rm ~/melpa/packages/%s-*; make recipes/%s" file file))
     #+END_SRC
 
     #+RESULTS:
@@ -458,12 +464,12 @@ C-c C-c this block first!
     Source:  https://github.com/alhassy/ob-latex-as-png.git
 
     Updating /Users/musa/melpa/working/ob-latex-as-png/
-    Built ob-latex-as-png in 0.978s, finished at Mon Jun 15 10:30:25 2020
+    Built ob-latex-as-png in 1.446s, finished at Sun Jun 28 14:15:14 2020
      ✓ Success:
-    16 -rw-r--r--  1 musa  staff   4.8K 15 Jun 10:30 packages/ob-latex-as-png-20200615.1427.el
-     8 -rw-r--r--  1 musa  staff   418B 15 Jun 10:30 packages/ob-latex-as-png-20200615.1427.entry
-     8 -rw-r--r--  1 musa  staff   1.0K 15 Jun 10:30 packages/ob-latex-as-png-badge.svg
-     8 -rw-r--r--  1 musa  staff   786B 15 Jun 10:30 packages/ob-latex-as-png-readme.txt
+    16 -rw-r--r--  1 musa  staff   6.1K 28 Jun 14:15 packages/ob-latex-as-png-20200628.1811.el
+     8 -rw-r--r--  1 musa  staff   418B 28 Jun 14:15 packages/ob-latex-as-png-20200628.1811.entry
+     8 -rw-r--r--  1 musa  staff   1.0K 28 Jun 14:15 packages/ob-latex-as-png-badge.svg
+     8 -rw-r--r--  1 musa  staff   786B 28 Jun 14:15 packages/ob-latex-as-png-readme.txt
 
     #+end_example
 
@@ -477,7 +483,7 @@ C-c C-c this block first!
   package-install-file)
 #+END_SRC
      #+RESULTS:
-     : #s(package-desc ob-latex-as-png (20200615 1427) "Org-babel functions for latex-as-png evaluation" ((emacs (26 1)) (org (9 1))) single nil nil ((:authors ("Musa Al-hassy" . "alhassy@gmail.com")) (:maintainer "Musa Al-hassy" . "alhassy@gmail.com") (:keywords "literate programming" "reproducible research" "org" "convenience") (:url . "https://github.com/alhassy/ob-latex-as-png")) nil)
+     : #s(package-desc ob-latex-as-png (20200628 1811) "Org-babel functions for latex-as-png evaluation" ((emacs (26 1)) (org (9 1))) single nil nil ((:authors ("Musa Al-hassy" . "alhassy@gmail.com")) (:maintainer "Musa Al-hassy" . "alhassy@gmail.com") (:keywords "literate programming" "reproducible research" "org" "convenience") (:url . "https://github.com/alhassy/ob-latex-as-png")) nil)
 
 15. [X] Produce a dedicated pull request branch
 
