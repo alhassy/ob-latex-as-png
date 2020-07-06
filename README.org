@@ -91,14 +91,16 @@ Note: The [[https://www.tug.org/FontCatalogue/goudyinitialen/][Goudy Initalen]] 
 
 
 Note: The extension given to =:file= does not matter, only the base name is used
-and a =.png= is produced.
+and a =.png= is produced. As such, extensions are completely optional (and
+discarded when provided).
 * Screenshot 3: Fine-grained Size Control
   :PROPERTIES:
   :CUSTOM_ID: Screenshot-3-Fine-grained-Size-Control
   :END:
 
-You can get fine grained control of the size of the resulting PNG by using
-LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.overleaf.com/learn/latex/picture_environment][environment]].
+Instead of using =:resolution= as in the previous screenshot, you can get fine
+grained control of the size of the resulting PNG by using LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]]
+[[https://www.overleaf.com/learn/latex/picture_environment][environment]].
 
 #+html: <div align="center">
 [[file:using-picture-enviornment_with_source.png]]
@@ -128,9 +130,6 @@ LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.o
   :PROPERTIES:
   :CUSTOM_ID: Screenshot-4-Local-LaTeX-Header-Matter
   :END:
-
-You can get fine grained control of the size of the resulting PNG by using
-LaTeX's [[https://en.wikibooks.org/wiki/LaTeX/Picture][picture]] [[https://www.overleaf.com/learn/latex/picture_environment][environment]].
 
 You can add arbitrary LaTeX header matter ---i.e., the stuff before LaTeX's
 =\begin{document}=--- by using having a line with just “ =% in= ” to separate the

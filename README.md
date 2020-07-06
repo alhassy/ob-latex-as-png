@@ -76,13 +76,15 @@ Note: The [Goudy Initalen](https://www.tug.org/FontCatalogue/goudyinitialen/) fo
 </details>
 
 Note: The extension given to `:file` does not matter, only the base name is used
-and a `.png` is produced.
+and a `.png` is produced. As such, extensions are completely optional (and
+discarded when provided).
 
 
 # Screenshot 3: Fine-grained Size Control
 
-You can get fine grained control of the size of the resulting PNG by using
-LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](https://www.overleaf.com/learn/latex/picture_environment).
+Instead of using `:resolution` as in the previous screenshot, you can get fine
+grained control of the size of the resulting PNG by using LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture)
+[environment](https://www.overleaf.com/learn/latex/picture_environment).
 
 <div align="center">
 
@@ -112,9 +114,6 @@ LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](htt
 
 
 # Screenshot 4: *Local* LaTeX Header Matter
-
-You can get fine grained control of the size of the resulting PNG by using
-LaTeX's [picture](https://en.wikibooks.org/wiki/LaTeX/Picture) [environment](https://www.overleaf.com/learn/latex/picture_environment).
 
 You can add arbitrary LaTeX header matter &#x2014;i.e., the stuff before LaTeX's
 `\begin{document}`&#x2014; by using having a line with just “ `% in` ” to separate the
