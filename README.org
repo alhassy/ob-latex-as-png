@@ -5,6 +5,18 @@
 
 # Link: [[https://tex.stackexchange.com/questions/11866/compile-a-latex-document-into-a-png-image-thats-as-short-as-possible][Compile a LaTeX document into a PNG image that's as short as possible]]
 
+#+BEGIN_SRC latex :exports results :file test.png :results file raw :headers '("\\usepackage{smartdiagram}")
+{\LARGE \LaTeX
+\begin{equation}
+f = r
+\end{equation}}
+% \smartdiagram[flow diagram]{Set up,Run,Analyse}
+#+END_SRC
+
+#+RESULTS:
+[[file:test.png]]
+
+
 * top matter                                                         :ignore:
   :PROPERTIES:
   :CUSTOM_ID: top-matter
