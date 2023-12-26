@@ -128,9 +128,9 @@ Argument CONTENTS is the source text of the block."
       (insert full-contents))
 
     (unless (ignore-errors (org-latex-compile (format "%s.tex" file)))
-            (message "ob-latex-as-png: There seems to be a LaTeX error!")
             (switch-to-buffer "*Org PDF LaTeX Output*")
-            (goto-char (point-max)))
+            (goto-char (point-max))
+            (error "ob-latex-as-png: There seems to be a LaTeX error!"))
 
     ;; Now to get the PNG and cleanup.
     (dolist (cmd (list
