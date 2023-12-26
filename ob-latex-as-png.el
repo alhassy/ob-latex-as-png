@@ -117,6 +117,7 @@ Argument CONTENTS is the source text of the block."
             ;; (org-latex-classes
             ;;  '(("article"
             ;;     "\\documentclass[varwidth,crop]{standalone}")))
+         (parent-file (buffer-file-name))
          )
 
     ;; ⟨0⟩ Generate the PDF
@@ -124,8 +125,14 @@ Argument CONTENTS is the source text of the block."
     ;; (org-babel-eval pdflatex full-contents))
     ;; This does not show a helpful errors log when LaTeX is malformed.
     ;; Let's use the org-export back-end instead.
-    (with-temp-file (format "%s.tex" file)
-      (insert full-contents))
+    (with-temp-buffer
+      (insert full-contents)
+      (make-directory
+        (setq output-dir (concat (file-name-sans-extension parent-file)
+			         "_org_ob_png_files"))
+	t)
+      (cd output-dir)
+      (write-file (format "%s.tex" file))
 
     (unless (ignore-errors (org-latex-compile (format "%s.tex" file)))
             (message "ob-latex-as-png: There seems to be a LaTeX error!")
@@ -143,12 +150,12 @@ Argument CONTENTS is the source text of the block."
                  ;; so I rename away the extra “-1”.
                  (format "mv %s-1.png %s.png" file file)
                  ;; ⟨3⟩ Remove the new PDF
-                 ; (format "rm %s.pdf" file)
+                 (format "rm -f %s.{pdf,tex,aux,log}{,~}" file)
                  ))
       (shell-command cmd))
 
     ;; ⟨5⟩ Return the a raw link to the PNG
-    (format "[[file:%s.png]]" file)))
+    (format "[[file:%s]]" (file-relative-name (concat file ".png") "../")))))
 
 (provide 'ob-latex-as-png)
 ;;; ob-latex-as-png.el ends here
